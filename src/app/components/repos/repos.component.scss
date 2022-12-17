@@ -1,0 +1,24 @@
+#repos {
+    .repos-head {
+        h1 {
+            width: fit-content;
+        }
+    }
+
+    .repos-body {
+        .repo {
+            background-color: transparent !important;
+            border: 1px solid rgba($color: black, $alpha: 0.3);
+
+            .img {
+                height: 100%;
+
+                img {
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+        }
+    }
+}

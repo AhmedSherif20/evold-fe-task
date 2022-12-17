@@ -1,0 +1,75 @@
+<section id="repos" class="py-2">
+
+    <div class="container">
+        <!-- head => title -->
+        <div class="repos-head mb-5">
+            <h1 class="bg-primary px-3 py-1 rounded-2 text-white text-capitalize ">Github Trending Repos</h1>
+        </div>
+
+        <ng-container *ngIf="!loading">
+            <!-- body => repos -->
+            <div class="repos-body">
+                <div class="col-xl-9 col-xxl-8" *ngFor="let repo of repos">
+                    <div class="repo overflow-hidden pe-lg-4 rounded-3 mb-4">
+                        <div class="row">
+                            <!-- repo owner img -->
+                            <div class="col-md-3">
+                                <a [href]="repo.owner.html_url" target="_blank"
+                                    class="img d-block d-flex justify-content-center align-items-center">
+                                    <img class="img-fluid" [title]="repo.owner.login" [src]="repo.owner.avatar_url">
+                                </a>
+                            </div>
+                            <!-- repo info -->
+                            <div class="col-md-9">
+                                <div class="info py-2 text-center text-lg-start">
+                                    <h2 class=" text-capitalize mb-2">
+                                        <a [href]="repo.html_url" target="_blank"
+                                            class=" text-decoration-none text-dark">
+                                            {{repo.name.split('-').join(' ')}}
+                                        </a>
+                                    </h2>
+                                    <p class="mb-4">{{repo.description}}</p>
+                                    <div
+                                        class="statistics d-flex justify-content-start align-items-center flex-column flex-lg-row">
+                                        <h5>
+                                            <span class="badge bg-success me-lg-2">
+                                                Stars: {{repo.stargazers_count|kNumbers}}
+                                            </span>
+                                        </h5>
+                                        <h5>
+                                            <span class="badge bg-warning me-lg-4">
+                                                Issues: {{repo.open_issues|kNumbers}}
+                                            </span>
+                                        </h5>
+                                        <p class="h5">
+                                            Submitted 30 days ago by
+                                            <a [href]="repo.owner.html_url"
+                                                target="_blank">{{repo.owner.login.split('-').join(' ')}}</a>
+                                        </p>
+                                        <!-- <p class="badge bg-success h2 d-inline-block">50 Stars</p> -->
+                                        <!-- <p class="badge bg-warning h2 d-inline-block">50 Issue</p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- footer => pagination -->
+            <div class="repos-footer col-xl-9 col-xxl-8 d-flex justify-content-center align-items-center">
+                <ngb-pagination [collectionSize]="totalRepos" [(page)]="pageNumber" (pageSize)="pageSize" [maxSize]="10"
+                    [rotate]="true" [ellipses]="true" [boundaryLinks]="true" [rotate]="true"
+                    (pageChange)="getRepos($event)"></ngb-pagination>
+
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="loading">
+            <div class="d-flex align-items-center justify-content-center flex-column ">
+                <div class="spinner-border text-primary mb-2" role="status">
+                </div>
+                <h2 class=" text-primary">Loading...</h2>
+            </div>
+        </ng-container>
+    </div>
+</section>
