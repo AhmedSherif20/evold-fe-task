@@ -9,10 +9,12 @@ import { firstValueFrom } from 'rxjs';
 })
 export class ReposComponent implements OnInit {
   pageNumber: number = 1;
-  pageSize: number = 10;
+  pageSize: number = 100;
   totalRepos: number = 1000;
   repos: Repo[] = [];
   loading: boolean = false;
+  error: boolean = false;
+  errorMsg: string = '';
   constructor(private githubApiService: GithubApiService) {}
 
   ngOnInit(): void {
@@ -35,8 +37,12 @@ export class ReposComponent implements OnInit {
       })
       .catch((err) => {
         this.loading = false;
-
-        console.log(err);
+        this.error = true;
+        this.errorMsg = err.error.message;
+        setTimeout(() => {
+          this.getRepos(1);
+          this.error = false;
+        }, 7000);
       });
   }
 

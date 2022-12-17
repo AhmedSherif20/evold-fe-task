@@ -6,7 +6,8 @@
             <h1 class="bg-primary px-3 py-1 rounded-2 text-white text-capitalize ">Github Trending Repos</h1>
         </div>
 
-        <ng-container *ngIf="!loading">
+        <!-- load end && no error && have data -->
+        <ng-container *ngIf="!loading && !error && repos.length > 0">
             <!-- body => repos -->
             <div class="repos-body">
                 <div class="col-xl-9 col-xxl-8" *ngFor="let repo of repos">
@@ -63,13 +64,27 @@
 
             </div>
         </ng-container>
+        <!-- load end && no error && don't have data -->
+        <ng-container *ngIf="!loading&& !error && repos.length == 0">
+            <ngb-alert [dismissible]="false" [type]="'info'" class=" text-capitalize text-center">No repositories
+                found</ngb-alert>
 
+        </ng-container>
+
+        <!-- load start-->
         <ng-container *ngIf="loading">
             <div class="d-flex align-items-center justify-content-center flex-column ">
                 <div class="spinner-border text-primary mb-2" role="status">
                 </div>
                 <h2 class=" text-primary">Loading...</h2>
             </div>
+        </ng-container>
+
+        <!-- load end && have error -->
+        <ng-container *ngIf="!loading&& error">
+            <ngb-alert [dismissible]="false" [type]="'info'" class=" text-capitalize text-center">
+                {{errorMsg + ', please try again later'}}
+            </ngb-alert>
         </ng-container>
     </div>
 </section>
