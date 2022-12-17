@@ -9,7 +9,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class ReposComponent implements OnInit {
   pageNumber: number = 1;
-  pageSize: number = 100;
+  pageSize: number = 10;
   totalRepos: number = 1000;
   repos: Repo[] = [];
   loading: boolean = false;
