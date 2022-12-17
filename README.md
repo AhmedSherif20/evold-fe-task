@@ -1,6 +1,6 @@
 # Evold-Frontend-Task
 
-live demo on [github-pages](google.come)
+live demo on [github-pages](https://ahmedsherif20.github.io/evold-fe-task/)
 
 ## About Dependencies
 
